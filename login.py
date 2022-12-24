@@ -19,6 +19,7 @@ def login(email = '', password = ''):
     
     message = "You have entered an invalid email"
     if validEmail(email):
+        # only the email parameter is injectable
         query = "SELECT * FROM users WHERE email = '" + email + "' AND password = %s"
         cursor.execute(query, (password))
 
