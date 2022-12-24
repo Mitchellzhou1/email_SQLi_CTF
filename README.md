@@ -1,7 +1,7 @@
 # email_SQLi
 email SQL injection for **OSIRIS Recruit** CTF challenges
 
-These days, alot of login pages require you to enter an email address that is associated with the account.
+These days, a lot of login pages require you to enter an email address that is associated with the account.
 This challenge is a basic SQL injection challenge but the twist is that the injection has to be in the form of an email.
 
 **Hints:**
