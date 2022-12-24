@@ -2,9 +2,7 @@
 email SQL injection for **OSIRIS Recruit** CTF challenges
 
 These days, a lot of login pages require you to enter an email address that is associated with the account.
-For this challenge, you will need to inject SQL into the email address. 
-
-Good Luck!
+For this challenge, you will need to inject SQL into the email address. Good Luck!
 
 **Hints:**
 
