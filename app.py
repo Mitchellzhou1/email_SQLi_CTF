@@ -11,6 +11,6 @@ conn = pymysql.connect(host="127.0.0.1",
                        port=3306,
                        user='root',
                        password='',
-                       db='email_sqli_CTF',
+                       db='user_enum_ctf',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)

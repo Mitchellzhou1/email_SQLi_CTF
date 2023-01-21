@@ -1,11 +1,4 @@
 from app import *
-import re
- 
-  
-def validEmail(email):
-    regex = "^[a-zA-Z0-9-_!#$%&'*+-/=?^_`{|}~']+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
-    return re.search(regex, email)
-
     
 
 
@@ -16,35 +9,40 @@ def login(email = '', password = ''):
 
     if not email and not password:
         return render_template('login.html')
-    
-    message = "You have entered an invalid email"
-    if validEmail(email):
-        # only the email parameter is injectable
-        query = "SELECT * FROM users WHERE email = '" + email + "' AND password = %s"
-        cursor.execute(query, (password))
 
-        user = cursor.fetchone()
-        if user:
-            session['email'] = email
-            return render_template('userHome.html', name = user['name'], email=user['email'], phone=user['phone'])
-        message = "Sorry, this user is doesn't exist"
+    query = "SELECT * FROM users WHERE email = %s AND password = %s"
+    cursor.execute(query, (email, password))
 
+    user = cursor.fetchone()
     cursor.close()
+    if user:
+        session['email'] = email
+        session['ID'] = user['userID']
+        return render_template('userHome.html', name = user['name'], email=user['email'], ID=user['userID'])
+    message = "Sorry, the creditials are incorrect"
+
     return render_template('login.html', error=message)
 
 
 
-@app.route('/submit', methods = ["POST"])
+@app.route('/home', methods = ["POST"])
 def submit():
     email = request.form['email']
     password = request.form['password']
     return login(email, password)
 
 
-@app.route('/userHome', methods = ["POST"])
-def openHomePage():
-    try:
-        email = session['email']
-    except Exception:
-        message = 'Please Login or Create an Account'
+@app.route('/home/{{userID}}', methods = ["POST"])
+def getUser(userID):
+    cursor = conn.cursor()
+    session['ID'] = userID
+    query = "SELECT * FROM users WHERE userID = %s"
+    cursor.execute(query, (userID))
+
+    user = cursor.fetchone()
+
+    if user:
+        return render_template('userHome.html', name = user['name'], email=user['email'], ID=user['userID'])
+    else:
+        message = "Sorry, that person doesn't exist in our database"
         return render_template('login.html', error=message)
