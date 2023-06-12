@@ -15,6 +15,16 @@
       background-position: center;
       background-repeat: no-repeat;
     }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
   </style>
   <head>
     <meta charset="utf-8">
@@ -31,11 +41,11 @@
 
   <body style="padding-top: 5rem">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">NYU Banking Login</a>
+      <a class="navbar-brand" href="#">SportsManager.com</a>
     </nav>
 
     <div class="container">
-        <form style="margin: 0 auto; width: 300px; text-align: center" action = "/submit" method="POST">
+        <form style="margin: 0 auto; width: 300px; text-align: center" action="/home" method="POST">
             <h2 class="form-signin-heading">Login</h2>
             <label for="email" class="sr-only">Email</label>
             <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
@@ -43,8 +53,17 @@
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
             <br/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+          </form>
     </div><!-- /.container -->
+    
+    <div class="container">
+      <form style="margin: 0 auto; width: 300px; text-align: center" action = "/home" method="POST">
+        <br/>
+          <a href={{url_for('getUser', ID)}}> Continue as Guest</a>
+        </form>
+  </div>
+
+
     {% if error%}
             <p class="error"><strong>Error:</strong> {{error}}</p>
     {% endif %}
