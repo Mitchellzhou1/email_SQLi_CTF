@@ -1,9 +1,8 @@
 # Import Flask Library
-from flask import Flask, render_template, request, session, url_for, redirect
+import string, random
+from flask import Flask, render_template, request, session, url_for, redirect, make_response
 import pymysql.cursors
 
-
-# Initialize the app from Flask
 app = Flask(__name__)
 
 # Configure MySQL
@@ -14,3 +13,5 @@ conn = pymysql.connect(host="127.0.0.1",
                        db='email_sqli_ctf',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
+
+
